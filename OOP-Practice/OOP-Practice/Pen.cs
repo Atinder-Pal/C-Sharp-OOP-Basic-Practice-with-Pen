@@ -11,6 +11,8 @@ namespace OOP_Practice
         private double _inkLevel;
         private double _maxInk;
         private bool _hasLid;
+        private int _charCount;
+        private const double inkForOneChar = 0.05;
 
         public string Brand 
         {
@@ -60,12 +62,18 @@ namespace OOP_Practice
             }
             set
             {
-                if( value >0 && value <= MaxInk )
+                if( value >=0 && value <= MaxInk )
                 _inkLevel = value;
-                else
+                else if( value <0 )
                 {
-                    throw new Exception("Ink Level should be between 0 and Maximum Ink Level");
+                    _inkLevel = 0;
+                    throw new Exception( "You can't write anymore! Ink finished!" );
                 }
+                else if(value > MaxInk)
+                {
+                    _inkLevel = MaxInk;
+                }
+                
             }
         }        
 
@@ -81,6 +89,48 @@ namespace OOP_Practice
             }
         }
 
+        public int CharCount
+        {
+            get
+            {
+                return _charCount;
+            }
+            set
+            {
+                _charCount = value;
+            }
+        }
 
+        // Default Constructor
+        public Pen()
+        {
+            Brand = "bic";
+            Colour = "Black";
+            MaxInk = 10;
+            HasLid = true;
+            InkLevel = MaxInk;
+        }
+
+        // Greedy Constructor
+        public Pen(string brand, string colour, double maxInk, double inkLevel, bool hasLid)
+        {
+            Brand = brand;
+            Colour = colour;
+            MaxInk = maxInk;            
+            InkLevel = inkLevel;
+            HasLid = hasLid;
+        }
+
+        public void Write()
+        {
+            CharCount = 10;
+            InkLevel -= inkForOneChar * CharCount;
+        }
+
+        public void Write( int charCount )
+        {
+            CharCount = charCount;
+            InkLevel -= (inkForOneChar * CharCount);
+        }
     }
 }
