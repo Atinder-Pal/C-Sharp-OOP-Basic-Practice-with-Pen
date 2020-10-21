@@ -13,17 +13,17 @@ namespace OOP_Practice
         private bool _hasLid;
         private int _charCount;
         private const double inkForOneChar = 0.05;
-
-        public string Brand 
+        private string lid;
+        public string Brand
         {
-            get 
+            get
             {
                 return _brandName;
             }
-            set 
+            set
             {
                 _brandName = value;
-            } 
+            }
         }
 
         public string Colour
@@ -62,20 +62,20 @@ namespace OOP_Practice
             }
             set
             {
-                if( value >=0 && value <= MaxInk )
-                _inkLevel = value;
-                else if( value <0 )
+                if (value >= 0 && value <= MaxInk)
+                    _inkLevel = value;
+                else if (value < 0)
                 {
                     _inkLevel = 0;
-                    throw new Exception( "You can't write anymore! Ink finished!" );
+                    throw new Exception("You can't write anymore! Ink finished!");
                 }
-                else if(value > MaxInk)
+                else if (value > MaxInk)
                 {
                     _inkLevel = MaxInk;
                 }
-                
+
             }
-        }        
+        }
 
         public bool HasLid
         {
@@ -88,7 +88,7 @@ namespace OOP_Practice
                 _hasLid = value;
             }
         }
-
+        
         public int CharCount
         {
             get
@@ -131,6 +131,17 @@ namespace OOP_Practice
         {
             CharCount = charCount;
             InkLevel -= (inkForOneChar * CharCount);
+        }
+        
+        public string LidStatus()
+        {
+            lid = HasLid ? "with" : "without";
+            return lid;
+        }
+        
+        public override string ToString()
+        {
+            return "This is a "+ Colour + " " + Brand  + " pen "+ LidStatus() +  " a lid with approximately " + InkLevel + "ml of the ink remaining.";
         }
     }
 }
