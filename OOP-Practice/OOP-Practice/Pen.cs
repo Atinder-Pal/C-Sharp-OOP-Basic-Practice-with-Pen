@@ -13,7 +13,7 @@ namespace OOP_Practice
         private bool _hasLid;
         private int _charCount;
         private const double inkForOneChar = 0.05;
-        private string lid;
+        
         public string Brand
         {
             get
@@ -135,13 +135,23 @@ namespace OOP_Practice
         
         public string LidStatus()
         {
+            string lid;
             lid = HasLid ? "with" : "without";
             return lid;
+        }
+
+        public int InkPercent()
+        {
+            int roundedInkPercent;
+            double inkPercent;
+            inkPercent = (InkLevel / MaxInk) * 100;
+            roundedInkPercent = (int)Math.Round(inkPercent / 5) * 5;
+            return roundedInkPercent;
         }
         
         public override string ToString()
         {
-            return "This is a "+ Colour + " " + Brand  + " pen "+ LidStatus() +  " a lid with approximately " + InkLevel + "ml of the ink remaining.";
+            return "This is a "+ Colour + " " + Brand  + " pen "+ LidStatus() +  " a lid with approximately " +  InkPercent() + "% of the ink remaining.";
         }
     }
 }
