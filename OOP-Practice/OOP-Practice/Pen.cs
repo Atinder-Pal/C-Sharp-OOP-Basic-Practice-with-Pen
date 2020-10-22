@@ -145,7 +145,7 @@ namespace OOP_Practice
             int roundedInkPercent;
             double inkPercent;
             inkPercent = (InkLevel / MaxInk) * 100;
-            roundedInkPercent = (int)Math.Round(inkPercent / 5) * 5;
+            roundedInkPercent = (int)Math.Round((inkPercent + 2.5) / 5) * 5;
             return roundedInkPercent;
         }
         
